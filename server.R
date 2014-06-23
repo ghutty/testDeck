@@ -1,6 +1,7 @@
 # server.R
 
 library(maps)
+library(mapproj)
 counties <- readRDS("data/counties.rds")
 source("helpers.R")
 
