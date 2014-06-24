@@ -6,6 +6,7 @@ framework   : html5slides        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
 widgets     : []            # {mathjax, quiz, bootstrap}
+ext_widgets: {rCharts: [libraries/nvd3]}
 mode        : selfcontained # {standalone, draft}
 output: ioslides_presentation
 ---
@@ -18,39 +19,34 @@ The MTCars Shiny App provides interactive plotting of MPG by the following varia
   - Cylinders
   - Gears
 
-## Slide with Bullets
-
-ext_widgets: {rCharts: [libraries/nvd3]}
-```{r echo = F, results = 'asis'}
-library(shiny)
-library(datasets)
-library(caret)
-library(ggplot2)
-library(rcharts)
-
+## Plot Result with Transmission Type
+```{r,echo=FALSE}
 mtcarsdata <- mtcars
 mtcarsdata$cyl <- factor(mtcarsdata$cyl)
 mtcarsdata$am <- factor(ifelse(mtcarsdata$am == 0, "Automatic", "Manual"))
 mtcarsdata$vs <- factor(mtcarsdata$vs)
 mtcarsdata$gear <- factor(mtcarsdata$gear)
 mtcarsdata$carb <- factor(mtcarsdata$carb)
-require(rCharts)
-haireye = as.data.frame(HairEyeColor)
-n1 <- nPlot(Freq ~ Hair, group = 'Eye', type = 'multiBarChart',
-  data = subset(haireye, Sex == 'Male')
-)
-n1$print('chart1')
+```
+```{r}
+boxplot(mpg~am, data = mtcarsdata, notch=FALSE, xlab = "Transmission", 
+ylab = "MPG",main = "MPG (Miles Per Gallon)", varwidth = TRUE, 
+col = c("orange","blue","red","green","yellow","purple"))
 ```
 
-## Slide with R Code and Output
+## Plot Result with Variable Cylinders
 
 ```{r}
-summary(cars)
+boxplot(mpg~cyl, data = mtcarsdata, notch=FALSE, xlab = "Transmission", 
+ylab = "MPG",main = "MPG (Miles Per Gallon)", varwidth = TRUE, 
+col = c("orange","blue","red","green","yellow","purple"))
 ```
 
-## Slide with Plot
+## Plot Result with Variable Gears
 
-```{r, echo=FALSE}
-plot(cars)
+```{r}
+boxplot(mpg~gear, data = mtcarsdata, notch=FALSE, xlab = "Transmission", 
+ylab = "MPG",main = "MPG (Miles Per Gallon)", varwidth = TRUE, 
+col = c("orange","blue","red","green","yellow","purple"))
 ```
 
